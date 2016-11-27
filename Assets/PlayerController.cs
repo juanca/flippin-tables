@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
   public float speed;
+  public Text countText;
 
+  private int count;
   private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
-    rb = GetComponent<Rigidbody>();
+    count = 0;
+    countText.text = "Count test: " + count.ToString ();
+    rb = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +35,8 @@ public class PlayerController : MonoBehaviour {
   void OnTriggerEnter (Collider other) {
     if (other.gameObject.CompareTag ("Pickup")) {
       other.gameObject.SetActive (false);
+      count += 1;
+      countText.text = "Count test: " + count.ToString ();
     }
   }
 }
